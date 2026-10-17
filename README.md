@@ -1,5 +1,5 @@
 # REZ Homes — private preview
-Unlisted GitHub Pages preview. . Not production.
+Unlisted GitHub Pages preview. `noindex`. Not production.
 
 # REZ Homes (static prototype)
 Property listings and advertising for Zambia. No investment product.
@@ -45,10 +45,25 @@ open index.html   # macOS; on Linux use xdg-open
 - `config.js`: `VERIFICATION_FEE: 500`, `VERIFICATION_PERIOD_DAYS: 365`, `BOOST {week:100, maxWeeks:12, recommendedWeeks:5}`, `AGENT_COMMISSION: 150`, `AGENT_AGREEMENT_VERSION`, `DELIVERY_ENABLED: false`, `PAYMENTS_ENABLED: false`.
 - Tests: `../test/v4.js` (130 headless-Chrome checks covering the v3 and v4 flows). Backend: `../supabase/schema.sql` section H.
 
-## v5 (17 October 2026) — mobile listings-first
-- Mobile (≤759px): compact hero, sticky-free search, listings lead; tall carousel kept for desktop only.
+## v5 (17 October 2026)
+- Badge text is just **"Verified"**.
+- **Boost discount offer** (PROPOSED): "Apply for a discount" in the boost sheet. A random whole-kwacha % inside `BOOST_DISCOUNT_MIN_PCT`–`BOOST_DISCOUNT_MAX_PCT` (5–15), capped by `DEMAND_LEVEL` (placeholder `normal` → max 10%, `high` → off), never below `BOOST_PRICE_FLOOR_PER_WEEK` (K85). Shows the "was" price and is locked per listing for `BOOST_DISCOUNT_OFFER_HOURS` (24) in localStorage.
+- **REZ Inspector portal** (`#/agent`): application with experience, optional licence and document uploads (metadata only), staff approve/reject, printable **REZ Certified Inspector** certificate (`#/cert/:id`, 1 year, "Not a professional licence"). Only approved inspectors with a valid certificate can take tasks. Reports carry photos, evidence documents and the inspector ID.
+- Tests: `../test/v5.js` (mobile viewport), plus `v3.js` and `v4.js`. Backend: `../supabase/schema.sql` section I.
+
+## Mobile listings-first (on top of v5)
+- Mobile (≤759px): compact hero, search, listings lead; tall carousel kept for desktop only.
 - Floating WhatsApp button hidden on mobile (Contact CTA remains); kept on desktop.
 - Touch targets ≥44px; landlord listing actions stack full-width.
 - Muted/green tokens darkened for WCAG AA contrast.
 - Footer stays "Powered by VIDMΛR" (never "Vidmar Holdings").
 
+## v6 — product UI (no seed listings)
+- Seed SAMPLE listings removed. Empty states name the city when filtered (e.g. "No listings in Ndola yet").
+- Badge text is **Verified** only. Footer stays Powered by VIDMΛR.
+- Listing cards and detail use a swipeable photo carousel; home has a featured horizontal strip when featured listings exist.
+- Accounts are tenants by default. Apply as landlord or agent from Account (ID, selfie, TPIN; landlords add ownership proof or email-documents option). Status: submitted → under review → approved/declined.
+- List flow ends with **Pay for verification now** or **Verify later**. Payment methods: MTN, Airtel, Binance (USDT/ETH/BTC), PayPal. Copy: "We'll send payment details after you submit."
+- Boost calculator: 1–5 weeks, 5 recommended, live totals and an off-recommendation note.
+- Mobile bottom nav: glassy (backdrop-filter) with solid fallback.
+- Agent info page (`#/agent-info`): ID, gear, handbook; commission varies — no amounts shown.

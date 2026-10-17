@@ -1,4 +1,4 @@
-// REZ Homes message templates (v4). PREVIEW ONLY: nothing is sent from this site.
+// REZ Homes message templates (v5). PREVIEW ONLY: nothing is sent from this site.
 // At launch these go out by email / SMS / WhatsApp through a provider chosen by Shadrick
 // (see ../launch_checklist.md). Until then REZ_CONFIG.DELIVERY_ENABLED = false.
 // Placeholders: {{name}} is replaced from the data passed to REZ_TPL.render(key, channel, data).
@@ -43,6 +43,19 @@ window.REZ_TEMPLATES = {
     email: { subject: "Update on {{listing_title}}", body: "Hi {{tenant_name}},\n\nThank you for applying for {{listing_title}}. The landlord has chosen another applicant this time.\n\nBrowse similar homes: {{site_url}}\n\nREZ Homes" },
     sms: { body: "REZ Homes: {{listing_title}} has gone to another applicant. See similar homes: {{site_url}}" },
     whatsapp: { body: "Hi {{tenant_name}}, thank you for applying for *{{listing_title}}* on REZ Homes. The landlord has chosen another applicant this time. Similar homes: {{site_url}}" }
+  },
+  // v5: REZ inspector application decisions.
+  inspector_approved: {
+    in_app: { title: "You're a REZ Certified Inspector", body: "REZ approved your inspector application. Certificate {{cert_no}}, valid until {{expires}}. You can now take inspection tasks near you." },
+    email: { subject: "Approved: your REZ Certified Inspector certificate {{cert_no}}", body: "Hi {{agent_name}},\n\nREZ approved your inspector application. Your certificate number is {{cert_no}}, valid until {{expires}}.\n\nIt certifies you to carry out REZ listing inspections on the REZ Homes platform. It is not a professional licence.\n\nOpen your tasks: {{site_url}}#/agent\n\nREZ Homes" },
+    sms: { body: "REZ Homes: {{agent_name}}, you're approved as a REZ Certified Inspector ({{cert_no}}, valid to {{expires}}). Open your REZ tasks to start." },
+    whatsapp: { body: "Hi {{agent_name}}, REZ Homes approved your inspector application. Certificate *{{cert_no}}*, valid until {{expires}}. You can now take inspection tasks near you." }
+  },
+  inspector_application_rejected: {
+    in_app: { title: "Inspector application: changes needed", body: "REZ couldn't approve your inspector application yet. Reason: {{reason}} Update your details or documents and apply again." },
+    email: { subject: "Your REZ inspector application", body: "Hi {{agent_name}},\n\nThank you for applying to inspect properties for REZ. We couldn't approve your application yet.\n\nReason: {{reason}}\n\nUpdate your details or documents and apply again: {{site_url}}#/agent\n\nREZ Homes" },
+    sms: { body: "REZ Homes: {{agent_name}}, your inspector application needs changes: {{reason}} Apply again in your REZ agent profile." },
+    whatsapp: { body: "Hi {{agent_name}}, REZ Homes couldn't approve your inspector application yet. Reason: {{reason}} Please update it and apply again." }
   },
   // Field agent gets a task assigned by staff.
   agent_task_assigned: {
