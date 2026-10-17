@@ -377,6 +377,8 @@ function authView(mode){
  $("#auth").onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target));try{mode==="up"?DB.signUp({...d,role:"tenant"}):DB.signIn(d.email,d.password);toast("Welcome!");route()}catch(x){$("#err").textContent=x.message}};
  $("#g").onclick=()=>{const email="google.user."+Date.now()+"@example.com";try{DB.signUp({name:"Google User",email,password:"google-oauth",role:"tenant",google:true});toast("Welcome!");route()}catch(x){$("#err")&&($("#err").textContent=x.message)}};
 }
+/** Days a listing has been live since verification (or creation). */
+const daysListed=l=>l.verifiedAt||l.created?Math.max(0,Math.floor((DB.now()-(l.verifiedAt||l.created))/DB.DAY)):0;
 function vstepper(l){if(l.vstatus==="rejected")return`<div class="steps"><span class="s bad">✕ Rejected</span></div>`;const i=VSTEPS.findIndex(s=>s[0]===l.vstatus);
  return`<div class="steps">${VSTEPS.map((s,j)=>`<span class="s${j<i?" done":j===i?" cur":""}">${j<i?"✓ ":""}${s[1]}</span>`).join("")}</div>`}
 /** Renders the landlord portal: plan, listings and applicant actions. */
