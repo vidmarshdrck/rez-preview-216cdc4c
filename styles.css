@@ -70,7 +70,7 @@ footer{color:var(--mut);font-size:13px;padding:20px 0 30px;text-align:center}
 .sheet .in{background:#fff;width:100%;max-width:480px;border-radius:28px 28px 0 0;padding:24px;display:grid;gap:10px;animation:up .25s}.sheet .pill{width:100%}
 form.f{display:grid;gap:10px}.f input,.f textarea,.f select{border:0;background:var(--bg);border-radius:14px;padding:14px;font:500 15px Inter;width:100%}
 .seg{display:flex;background:var(--bg);border-radius:999px;padding:4px}.seg button{flex:1;border:0;background:none;border-radius:999px;padding:10px;font:700 14px Inter;cursor:pointer}.seg button.on{background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.08);color:var(--g)}
-.gbtn{background:#fff;border:1.5px solid #e3e8e5;color:var(--ink);width:100%}.demo{font-size:12px;color:#a36b00;background:var(--gold2);padding:6px 10px;border-radius:10px;text-align:center}
+.gbtn{background:#fff;border:1.5px solid #e3e8e5;color:var(--ink);width:100%}
 .list .it{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-top:1px solid #f0f2f1}.st{font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--g2);color:var(--g)}
 .thumbs{display:flex;gap:6px;flex-wrap:wrap}.thumbs img{width:64px;height:64px;object-fit:cover;border-radius:10px}#pinmap{height:240px;border-radius:16px}
 .toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-weight:600;opacity:0;transition:.3s;z-index:60;pointer-events:none}.toast.on{opacity:1}
