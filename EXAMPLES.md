@@ -15,6 +15,8 @@ No cities were added or renamed. There are no for-sale examples, purchase prices
 
 Examples use existing licensed stock photos (see img/CREDITS.md), imaginary rents/features and approximate area coordinates. None is a real listing, inspection, ownership or availability claim. Cards and details carry example labels. No application, enquiry or payment is accepted for sample IDs, and sample details do not offer real viewing directions.
 
+Rental cards match the mobile reference proportions and typography, while retaining the current navigation and photo carousels. Gold SAMPLE and green For rent badges distinguish examples without implying verification. Only the student-room example is marked Featured to demonstrate the gold badge and featured layout; this is illustrative sample placement, not paid placement or an inspection claim.
+
 Example mode is opt-in. Normal browsing remains unchanged, with no seeded public inventory. Existing browser-local landlord listings are not replaced, cleared or reset. No production backend, account, payment or notification integration is enabled by these fixtures.
 
 Checks:

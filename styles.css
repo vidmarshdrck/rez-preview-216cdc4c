@@ -310,3 +310,13 @@ s.was{color:#9aa69f;font-weight:600;font-size:.62em;text-decoration-thickness:2p
   .feat-card{flex-basis:240px}
   .pcar.phero{min-height:360px}
 }
+
+/* Reference rental-card proportions, scoped to preserve other layouts. */
+.lcard{border-radius:24px}
+.lcard>.ph{height:auto;aspect-ratio:23/10;display:block}
+.lcard>.ph .pcar{position:absolute;inset:0;min-height:0}
+.lcard>.cb{padding:18px}
+.lcard>.cb h3{font-size:17px;line-height:1.2}
+.lcard>.cb .pr{font-size:30px;margin:14px 0;letter-spacing:-1.2px}
+.lcard>.cb .pr small{font-size:14px}
+.tags .tag.rent{background:var(--g);color:#fff}

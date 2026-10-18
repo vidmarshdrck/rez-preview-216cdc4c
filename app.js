@@ -19,7 +19,7 @@ const isFeat=l=>!!(l.featured||(l.boostUntil&&l.boostUntil>DB.now()));
 const sortF=a=>a.sort((x,y)=>(isFeat(y)-isFeat(x)));
 const vvv=l=>l.vstatus==="verified"&&!l.flagReverify&&!l.vexpired;
 const vstatusLabel=l=>l.vexpired?(l.renewalPaid?"Re-verification fee recorded · inspection due":"Re-verification due"):l.vstatus==="awaiting_payment"&&l.payConfirmed?"Fee recorded · booking inspection":VLABEL[l.vstatus];
-const tags=l=>l.sample?`<div class="tags"><span class="tag s">EXAMPLE · FOR RENT</span></div>`:`<div class="tags">${isFeat(l)?'<span class="tag f">★ Featured</span>':""}${vvv(l)?'<span class="tag v vb">Verified</span>':(l.vstatus&&l.vstatus!=='verified'?`<span class="tag p">${esc(vstatusLabel(l))}</span>`:"")}${l.leavingDate?`<span class="tag a">Available ${esc(D(l.leavingDate))}</span>`:""}</div>`;
+const tags=l=>l.sample?`<div class="tags"><span class="tag s">SAMPLE</span>${isFeat(l)?'<span class="tag f">★ Featured</span>':""}<span class="tag rent">For rent</span></div>`:`<div class="tags">${isFeat(l)?'<span class="tag f">★ Featured</span>':""}${vvv(l)?'<span class="tag v vb">Verified</span>':(l.vstatus&&l.vstatus!=='verified'?`<span class="tag p">${esc(vstatusLabel(l))}</span>`:"")}${l.leavingDate?`<span class="tag a">Available ${esc(D(l.leavingDate))}</span>`:""}</div>`;
 
 /** Builds a swipeable photo strip with dots for a listing's photos. */
 function photoCarousel(photos, opts={}){
