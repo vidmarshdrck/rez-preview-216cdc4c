@@ -6,7 +6,7 @@ const C=window.REZ_CONFIG, DAY=864e5;
 const K=k=>"rez_"+k, get=(k,d)=>{try{return JSON.parse(localStorage.getItem(K(k)))??d}catch(e){return d}}, set=(k,v)=>localStorage.setItem(K(k),JSON.stringify(v));
 const uid=()=>Math.random().toString(36).slice(2,10);
 const now=()=>Date.now()+get("clock",0); // demo clock offset (admin can advance it to test expiry)
-const SAMPLE=[]; // no seed listings — real inventory comes from landlords after approval
+const SAMPLE=window.REZ_EXAMPLES||[]; // explicit ?examples=1 review mode; never persisted into local inventory
 // migrate v2 records (status "pending", verified flag) once
 (()=>{const a=get("listings",[]);if(a.some(l=>!l.vstatus)){set("listings",a.map(l=>l.vstatus?l:{...l,vstatus:l.verified?"verified":"awaiting_payment",payConfirmed:false}))}})();
 const users=()=>get("users",[]), userById=id=>users().find(u=>u.id===id);
@@ -69,7 +69,7 @@ function saveRoleApp(app){const a=roleApps();const i=a.findIndex(x=>x.id===app.i
 const DB={
  now,DAY,plan,subActive,feeRequired,
  listings,listing,
- publicListings:()=>listings().filter(l=>l.status==="active"),
+ publicListings:(purpose="rent")=>listings().filter(l=>l.status==="active"&&(l.purpose||"rent")===purpose),
  roleApps, saveRoleApp,
  /** Returns the latest role application of a given kind for the signed-in user. */
  latestRoleApp(kind){const u=DB.user();if(!u)return null;return roleApps().filter(a=>a.userId===u.id&&a.kind===kind).sort((a,b)=>b.created-a.created)[0]||null},
@@ -102,7 +102,7 @@ const DB={
   upd(id,{hidden:false,leavingDate:leavingDate||null,reactivatedAt:now()});log(id,leavingDate?`Tenant leaving ${leavingDate}: relisted early.`:"Reactivated by landlord.");
   return subActive(u)?{ok:true}:{needPayment:true}},
  // ----- payments (placeholder: nothing is charged) -----
- createPayment({purpose,listingId,landlord,amount,method,planId,weeks,discount}){const p={id:uid(),ref:ref(),purpose,listingId:listingId||null,landlord,amount,method,planId:planId||null,weeks:weeks||null,discount:discount||null,status:"pending",created:now()};set("payments",[...get("payments",[]),p]);return p},
+ createPayment({purpose,listingId,landlord,amount,method,planId,weeks,discount}){if(listingId&&listing(listingId)?.sample)throw Error("Example properties do not accept payments");const p={id:uid(),ref:ref(),purpose,listingId:listingId||null,landlord,amount,method,planId:planId||null,weeks:weeks||null,discount:discount||null,status:"pending",created:now()};set("payments",[...get("payments",[]),p]);return p},
  payments:()=>get("payments",[]),
  // Staff records a payment that arrived outside the site (e.g. mobile money). Boaz verifies transaction_id + amount + timestamp.
  recordPayment(pid,{transaction_id,amount,paid_at,recorded_by}){
@@ -130,7 +130,7 @@ const DB={
  // ----- metrics -----
  lastViewed:()=>get("lastViewed",null),
  trackView(id){set("lastViewed",id);const k="rez_seen_"+id;if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,1);const v=get("views",{});v[id]=(v[id]||0)+1;set("views",v);set("viewlog",[...get("viewlog",[]).slice(-2000),{id,at:now()}])},
- addEnquiry(e){set("enquiries",[...get("enquiries",[]),{...e,id:uid(),at:now()}])},
+ addEnquiry(e){if(listing(e.listingId)?.sample)throw Error("Example properties do not accept enquiries");set("enquiries",[...get("enquiries",[]),{...e,id:uid(),at:now()}])},
  enquiries:()=>get("enquiries",[]),
  viewlog:()=>get("viewlog",[]),
  // ----- accounts -----
@@ -142,7 +142,7 @@ const DB={
  updateUser(p,id){const s=id||get("session");set("users",users().map(u=>u.id===s?{...u,...p}:u))},
  staffDemo(){const email="staff.demo@rez.example";let u=users().find(x=>x.email===email);if(!u){const us=users();u={id:"staff-demo",name:"REZ Staff",email,password:"",role:"admin",saved:[],trips:[],meets:{}};us.push(u);set("users",us)}set("session",u.id);return u},
  applications:()=>get("apps",[]),
- apply(a){const x=get("apps",[]);const n={...a,id:uid(),status:"Submitted",created:now()};x.push(n);set("apps",x);return n},
+ apply(a){if(listing(a.listingId)?.sample)throw Error("Example properties do not accept applications");const x=get("apps",[]);const n={...a,id:uid(),status:"Submitted",created:now()};x.push(n);set("apps",x);return n},
  setAppStatus(id,status){set("apps",get("apps",[]).map(a=>a.id===id?{...a,status}:a))},
  // ----- tenant profile (optional fields; saved on the user) -----
  saveTenantProfile(p){DB.updateUser({profile:{...(DB.user()?.profile||{}),...p}})},
