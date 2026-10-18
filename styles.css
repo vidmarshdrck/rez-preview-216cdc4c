@@ -163,7 +163,6 @@ s.was{color:#9aa69f;font-weight:600;font-size:.62em;text-decoration-thickness:2p
 /* v5 mobile-first: listings lead, touch targets, float clearance */
 .mhero{display:none}
 .home-stack{display:flex;flex-direction:column}
-@media(max-width:767px){.home-stack>#sale-examples{order:4}}
 #example-detail button[disabled]{opacity:.6;cursor:not-allowed}
 .wafloat{transition:transform .25s ease,opacity .25s ease}
 .wafloat.scroll-hide{transform:translateY(120%);opacity:0;pointer-events:none}

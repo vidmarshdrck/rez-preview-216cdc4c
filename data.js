@@ -69,7 +69,7 @@ function saveRoleApp(app){const a=roleApps();const i=a.findIndex(x=>x.id===app.i
 const DB={
  now,DAY,plan,subActive,feeRequired,
  listings,listing,
- publicListings:(purpose="rent")=>listings().filter(l=>l.status==="active"&&(l.purpose||"rent")===purpose),
+ publicListings:()=>listings().filter(l=>l.status==="active"),
  roleApps, saveRoleApp,
  /** Returns the latest role application of a given kind for the signed-in user. */
  latestRoleApp(kind){const u=DB.user();if(!u)return null;return roleApps().filter(a=>a.userId===u.id&&a.kind===kind).sort((a,b)=>b.created-a.created)[0]||null},

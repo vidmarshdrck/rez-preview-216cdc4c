@@ -1,8 +1,8 @@
-# Owner-review property examples
+# Owner-review rental examples
 
-Open `/?examples=1` to see fictional review fixtures. Opening the preview normally remains unchanged: no seeded live inventory. Existing browser-local user listings are not replaced, persisted into, cleared or reset.
+REZ Homes is a rental-listing and advertising platform. Landlords post their properties and enter their own **monthly rent**, security deposit and upfront rental months. It is not a house-sales marketplace. The sample rents below are fictional review data, not REZ-set landlord prices or market valuations.
 
-Coverage uses the app's existing city list without adding or renaming any city:
+Open `/?examples=1` to see seven rental examples, one per existing city:
 - Lusaka — Chalala rental house.
 - Ndola — Northrise rental flat.
 - Kitwe — student rental room.
@@ -11,13 +11,13 @@ Coverage uses the app's existing city list without adding or renaming any city:
 - Chingola — rental house.
 - Kasama — rental family house.
 
-A separate section contains three additional for-sale examples (Lusaka and Kitwe). Sale cards/details show an illustrative asking price, never a monthly rental price. City/type/rent filters apply to the rental collection; the separate for-sale collection is illustrative and not an exhaustive city inventory.
+No cities were added or renamed. There are no for-sale examples, purchase prices or sale browsing controls. Cards display monthly rent; details show monthly rent, deposit and upfront rent. The landlord form still takes the landlord's own `rent` value unchanged.
 
-All ten examples use existing licensed stock photos (see img/CREDITS.md), imaginary prices/features and approximate area coordinates. None is a real listing, valuation, inspection, title/ownership or availability claim. Cards and details carry example labels. No application, enquiry or payment is accepted for these sample IDs. Example detail pages do not offer actual viewing directions. Nothing is submitted to a landlord, inspector, payment provider or real property backend.
+Examples use existing licensed stock photos (see img/CREDITS.md), imaginary rents/features and approximate area coordinates. None is a real listing, inspection, ownership or availability claim. Cards and details carry example labels. No application, enquiry or payment is accepted for sample IDs, and sample details do not offer real viewing directions.
 
-Sample mode exists only on the current review URL; it does not enable a production sales/listing workflow. It preserves the newer preview photo carousels, mobile layout, inspector changes and default inventory behavior rather than copying an older source tree over them.
+Example mode is opt-in. Normal browsing remains unchanged, with no seeded public inventory. Existing browser-local landlord listings are not replaced, cleared or reset. No production backend, account, payment or notification integration is enabled by these fixtures.
 
 Checks:
-- `node --test examples.test.cjs`: exact city coverage/IDs, photos present, opt-in/default behavior, saved-listing preservation, rental/sale separation and rejected sample applications/enquiries/payments.
-- `node --check app.js`, `node --check data.js`, `node --check examples.js`.
-- Actual Chromium desktop/mobile checks: seven rental city filters, three sale cards, details/reload, asking-price labels, no sample application/enquiry controls, images and no horizontal overflow/page errors. Published URL must be checked again after the exact Pages deployment completes.
+- `node --test examples.test.cjs`: exact existing-city coverage, rental-only data/display, photo existence, saved-listing preservation, rejected sample transactions and roundtrip of a landlord-entered monthly rent.
+- Syntax checks for app.js, data.js and examples.js.
+- Actual Chromium desktop/mobile checks of all city filters, cards, rental details/reload, absent sales section, images and overflow, repeated on the published URL after deployment.
